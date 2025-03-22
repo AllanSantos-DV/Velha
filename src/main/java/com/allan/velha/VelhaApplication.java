@@ -10,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 public class VelhaApplication extends Application {
 
     @Override
@@ -27,7 +29,7 @@ public class VelhaApplication extends Application {
         Parent root = loader.load();
         Scene scene = new Scene(root);
         stage.setTitle("Jogo da Velha");
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("/icons/jogo-da-velha.png")));
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/icons/jogo-da-velha.png"))));
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

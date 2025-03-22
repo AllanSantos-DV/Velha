@@ -8,9 +8,10 @@ import java.util.*;
  * Mantém um registro das jogadas que levaram a derrotas para evitar repeti-las.
  */
 public class GameMemory implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
     private static final String MEMORY_FILE = "src/main/resources/data/game_memory.dat";
-    private Map<String, List<BoardState>> losingMoves;
+    private final Map<String, List<BoardState>> losingMoves;
 
     public GameMemory() {
         this.losingMoves = loadMemory();
@@ -146,48 +147,46 @@ public class GameMemory implements Serializable {
     }
 
     /**
-     * Classe interna que representa um estado do tabuleiro e uma jogada específica.
-     */
-    private static class BoardState implements Serializable {
-        private static final long serialVersionUID = 1L;
-        private final char[][] board;
-        private final int row;
-        private final int col;
+         * Classe interna que representa um estado do tabuleiro e uma jogada específica.
+         */
+        private record BoardState(char[][] board, int row, int col) implements Serializable {
+            @Serial
+            private static final long serialVersionUID = 1L;
 
-        BoardState(char[][] board, int row, int col) {
-            this.board = new char[3][3];
-            for (int i = 0; i < 3; i++) {
-                System.arraycopy(board[i], 0, this.board[i], 0, 3);
-            }
-            this.row = row;
-            this.col = col;
-        }
-
-        boolean isEquivalentMove(char[][] currentBoard, int moveRow, int moveCol) {
-            // Verifica se a posição é a mesma
-            if (row != moveRow || col != moveCol) {
-                return false;
-            }
-
-            // Conta o número total de peças em cada tabuleiro
-            int totalPieces = 0;
-            int totalCurrentPieces = 0;
-            int matchingPositions = 0;
-
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 3; j++) {
-                    if (board[i][j] != ' ')
-                        totalPieces++;
-                    if (currentBoard[i][j] != ' ')
-                        totalCurrentPieces++;
-                    if (board[i][j] == currentBoard[i][j])
-                        matchingPositions++;
+        private BoardState(char[][] board, int row, int col) {
+                this.board = new char[3][3];
+                for (int i = 0; i < 3; i++) {
+                    System.arraycopy(board[i], 0, this.board[i], 0, 3);
                 }
+                this.row = row;
+                this.col = col;
             }
 
-            // Verifica se o número de peças é similar e se a maioria das posições
-            // corresponde
-            return totalPieces == totalCurrentPieces && matchingPositions >= 7;
+            boolean isEquivalentMove(char[][] currentBoard, int moveRow, int moveCol) {
+                // Verifica se a posição é a mesma
+                if (row != moveRow || col != moveCol) {
+                    return false;
+                }
+
+                // Conta o número total de peças em cada tabuleiro
+                int totalPieces = 0;
+                int totalCurrentPieces = 0;
+                int matchingPositions = 0;
+
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        if (board[i][j] != ' ')
+                            totalPieces++;
+                        if (currentBoard[i][j] != ' ')
+                            totalCurrentPieces++;
+                        if (board[i][j] == currentBoard[i][j])
+                            matchingPositions++;
+                    }
+                }
+
+                // Verifica se o número de peças é similar e se a maioria das posições
+                // corresponde
+                return totalPieces == totalCurrentPieces && matchingPositions >= 7;
+            }
         }
-    }
 }

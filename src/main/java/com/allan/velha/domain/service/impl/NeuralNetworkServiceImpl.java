@@ -11,7 +11,7 @@ import java.util.Random;
 public class NeuralNetworkServiceImpl implements NeuralNetworkService {
     private final Random random = new Random();
     private final GameMemory gameMemory = new GameMemory();
-    private List<BoardState> moveHistory = new ArrayList<>();
+    private final List<BoardState> moveHistory = new ArrayList<>();
 
     @Override
     public int[] predictNextMove(Game game) {
@@ -135,8 +135,7 @@ public class NeuralNetworkServiceImpl implements NeuralNetworkService {
                 return true;
             if ((row == 2 && col == 0) && (board[1][1] != ' ' || board[1][0] != ' ' || board[2][1] != ' '))
                 return true;
-            if ((row == 2 && col == 2) && (board[1][1] != ' ' || board[1][2] != ' ' || board[2][1] != ' '))
-                return true;
+            return (row == 2 && col == 2) && (board[1][1] != ' ' || board[1][2] != ' ' || board[2][1] != ' ');
         }
 
         return false;
@@ -200,7 +199,7 @@ public class NeuralNetworkServiceImpl implements NeuralNetworkService {
     }
 
     public void registerGameResult(Game game) {
-        if (game.getWinner() != null && game.getWinner().getName().equals("X")) {
+        if (game.getWinner() != null && game.getWinner().name().equals("X")) {
             // Se o jogador humano (X) ganhou, registrar todas as jogadas como perdedoras
             for (BoardState state : moveHistory) {
                 gameMemory.addLosingMove(state.board, state.row, state.col);
@@ -209,15 +208,6 @@ public class NeuralNetworkServiceImpl implements NeuralNetworkService {
         moveHistory.clear();
     }
 
-    private static class BoardState {
-        final char[][] board;
-        final int row;
-        final int col;
-
-        BoardState(char[][] board, int row, int col) {
-            this.board = board;
-            this.row = row;
-            this.col = col;
-        }
+    private record BoardState(char[][] board, int row, int col) {
     }
 }

@@ -70,10 +70,6 @@ public class Board {
         return true;
     }
 
-    public char getCell(int row, int col) {
-        return board[row][col];
-    }
-
     public char[][] getState() {
         char[][] state = new char[SIZE][SIZE];
         for (int i = 0; i < SIZE; i++) {

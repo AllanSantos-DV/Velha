@@ -7,6 +7,7 @@ import com.allan.velha.domain.service.impl.NeuralNetworkServiceImpl;
 import com.allan.velha.presentation.model.Score;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -141,12 +142,12 @@ public class VelhaController {
      * Manipula o clique em um botão do tabuleiro.
      */
     @FXML
-    public void handleButtonClick(javafx.event.ActionEvent event) {
+    public void handleButtonClick(ActionEvent event) {
         if (!isGameStarted)
             return;
 
         // Só aceita cliques quando for a vez do jogador X (humano)
-        if (!game.getCurrentPlayer().getName().equals("X"))
+        if (!game.getCurrentPlayer().name().equals("X"))
             return;
 
         Button clickedButton = (Button) event.getSource();
@@ -174,7 +175,7 @@ public class VelhaController {
 
     private void makePlayerMove(int[] position) {
         // Garante que o jogador humano só joga como X
-        if (!game.getCurrentPlayer().getName().equals("X"))
+        if (!game.getCurrentPlayer().name().equals("X"))
             return;
 
         game.makeMove(position[0], position[1]);
@@ -191,7 +192,7 @@ public class VelhaController {
 
     private void makeAIMove() {
         // Garante que a IA só joga como O
-        if (!game.getCurrentPlayer().getName().equals("O"))
+        if (!game.getCurrentPlayer().name().equals("O"))
             return;
 
         int[] aiMove = neuralNetworkService.predictNextMove(game);
@@ -227,7 +228,7 @@ public class VelhaController {
 
             String message;
             if (game.getWinner() != null) {
-                message = "Jogador " + game.getWinner().getName() + " venceu!\nClique para jogar novamente.";
+                message = "Jogador " + game.getWinner().name() + " venceu!\nClique para jogar novamente.";
                 if (neuralNetworkService instanceof NeuralNetworkServiceImpl) {
                     ((NeuralNetworkServiceImpl) neuralNetworkService).registerGameResult(game);
                 }
@@ -252,9 +253,9 @@ public class VelhaController {
     private void updateStatusLabel() {
         if (game.isGameOver()) {
             Player winner = game.getWinner();
-            lblPlayer.setText(winner != null ? "Jogador " + winner.getName() + " venceu!" : "Empate!");
+            lblPlayer.setText(winner != null ? "Jogador " + winner.name() + " venceu!" : "Empate!");
         } else {
-            lblPlayer.setText("Vez do jogador " + game.getCurrentPlayer().getName());
+            lblPlayer.setText("Vez do jogador " + game.getCurrentPlayer().name());
         }
     }
 
@@ -277,7 +278,7 @@ public class VelhaController {
     private void updateScore() {
         Player winner = game.getWinner();
         if (winner != null) {
-            String playerName = winner.getName();
+            String playerName = winner.name();
             int currentIndex = playerName.equals("X") ? 0 : 1;
             Score currentScore = scores.get(currentIndex);
             scores.set(currentIndex, new Score(playerName, currentScore.getWins() + 1));
