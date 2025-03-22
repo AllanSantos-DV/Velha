@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+    
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane gridLinesVisible="true" hgap="10.0" layoutX="14.0" layoutY="136.0" prefHeight="450.0" prefWidth="450.0" style="-fx-background-color: lightgray; -fx-border-width: 0;" vgap="10.0">
+        <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="150.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="150.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="150.0" valignment="CENTER" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <Button fx:id="btn00" disable="true" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: beige;">
+           <font>
+               <Font name="System Bold" size="60.0" />
+           </font>
+        </Button>
+        <Button fx:id="btn02" disable="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: beige;" GridPane.columnIndex="2">
+           <font>
+               <Font name="System Bold" size="60.0" />
+           </font>
+        </Button>
+        <Button fx:id="btn01" disable="true" layoutX="163.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: beige;" GridPane.columnIndex="1">
+           <font>
+               <Font name="System Bold" size="60.0" />
+           </font>
+        </Button>
+        <Button fx:id="btn10" disable="true" layoutX="316.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: beige;" GridPane.rowIndex="1">
+           <font>
+               <Font name="System Bold" size="60.0" />
+           </font>
+        </Button>
+        <Button fx:id="btn11" disable="true" layoutX="10.0" layoutY="163.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: beige;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+           <font>
+               <Font name="System Bold" size="60.0" />
+           </font>
+        </Button>
+        <Button fx:id="btn12" disable="true" layoutX="163.0" layoutY="163.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: beige;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+           <font>
+               <Font name="System Bold" size="60.0" />
+           </font>
+        </Button>
+        <Button fx:id="btn20" disable="true" layoutX="316.0" layoutY="163.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: beige;" GridPane.rowIndex="2">
+           <font>
+               <Font name="System Bold" size="60.0" />
+           </font>
+        </Button>
+        <Button fx:id="btn21" disable="true" layoutX="10.0" layoutY="316.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: beige;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+           <font>
+               <Font name="System Bold" size="60.0" />
+           </font>
+        </Button>
+        <Button fx:id="btn22" disable="true" layoutX="163.0" layoutY="316.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: beige;" GridPane.columnIndex="2" GridPane.rowIndex="2">
+           <font>
+               <Font name="System Bold" size="60.0" />
+           </font>
+        </Button>
+        <Label fx:id="lblOverlay" alignment="CENTER" contentDisplay="CENTER" prefHeight="450.0" prefWidth="450.0" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" visible="false" onMouseClicked="#handleOverlayClick" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowSpan="3" GridPane.valignment="CENTER">
+           <font>
+              <Font size="30.0" />
+           </font>
+        </Label>
+        <effect>
+           <DropShadow offsetX="5.0" offsetY="5.0" />
+        </effect>
+    </GridPane>
+    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="192.0" layoutY="32.0" text="JOGO DA VELHA">
+        <font>
+          <Font name="System Bold" size="34.0" />
+        </font>
+        <effect>
+           <DropShadow offsetX="5.0" offsetY="5.0" />
+        </effect>
+    </Label>
+    <VBox alignment="CENTER" layoutX="484.0" layoutY="136.0" prefHeight="250.0" prefWidth="150.0" spacing="10.0">
+        <Button fx:id="btnStart" mnemonicParsing="false" onAction="#startNewGame" prefHeight="25.0" prefWidth="100.0" text="Iniciar" />
+        <Button fx:id="btnRestart" mnemonicParsing="false" onAction="#resetGame" prefHeight="25.0" prefWidth="100.0" text="Resetar" />
+        <TableView fx:id="tblScore" focusTraversable="false" prefHeight="74.0" prefWidth="150.0">
+            <columns>
+                <TableColumn fx:id="colPlayer" editable="false" minWidth="70.0" prefWidth="74.0" resizable="false" sortable="false" text="PLAYER" />
+                <TableColumn fx:id="colWins" editable="false" minWidth="70.0" prefWidth="74.0" resizable="false" sortable="false" text="WINS" />
+            </columns>
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+        </TableView>
+       <Label text="EMPATES" />
+       <Label fx:id="lblDraws" text="0" />
+    </VBox>
+    <Label fx:id="lblPlayer" alignment="CENTER" contentDisplay="CENTER" layoutX="139.0" layoutY="93.0" prefHeight="30.0" prefWidth="200.0">
+        <font>
+           <Font size="20.0" />
+        </font>
+    </Label>
+</Pane> 
